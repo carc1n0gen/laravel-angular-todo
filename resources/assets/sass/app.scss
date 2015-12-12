@@ -1,0 +1,22 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+li button {
+	border: none;
+	background: none;
+}
+
+li button.pull-right {
+	float: right;
+}
+
+li button.danger {
+	color: red;
+}
+
+li button.primary {
+	color: blue;
+}
+
+li button.success {
+	color: green;
+}
