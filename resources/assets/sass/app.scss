@@ -1,6 +1,11 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+li {
+	line-height: 34px;
+}
+
 li button {
+	height: 34px;
 	border: none;
 	background: none;
 }

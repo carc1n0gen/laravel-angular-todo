@@ -1,12 +1,10 @@
 'use strict';
 
-var $ = require('jquery');
-
-module.exports = function($scope, $http, $q) {
+module.exports = function($scope, $http, $window, $browser) {
 	$scope.tasks = [];
 	$scope.task = '';
 	$scope.editingState = {};
-	var taskField = $('#new-todo');
+	var taskField = $window.document.getElementById('new-todo');
 
 	$http.get('/api/1.0/task')
 		.then(function _then(res) {
@@ -19,11 +17,11 @@ module.exports = function($scope, $http, $q) {
 			taskField.focus();
 		});
 
-	function editTask(task, newTask) {
-		$http.put('/api/1.0/task/' + task.id, newTask)
+	function editTask(task, updates) {
+		return $http.put('/api/1.0/task/' + task.id, updates)
 			.then(function _then(res) {
-				for (var prop in newTask) {
-					task[prop] = newTask[prop];
+				for (var prop in res.data) {
+					task[prop] = res.data[prop];
 				}
 			})
 			.catch(function _catch(error) {
@@ -53,7 +51,7 @@ module.exports = function($scope, $http, $q) {
 
 	$scope.restoreTask = function(task) {
 		editTask(task, { completed_at: null });
-	}
+	};
 
 	$scope.deleteTask = function(task) {
 		$http.delete('/api/1.0/task/' + task.id)
@@ -66,5 +64,28 @@ module.exports = function($scope, $http, $q) {
 			.catch(function _catch(error) {
 				console.log(error);
 			});
+	};
+
+	$scope.showEditForm = function(taskId) {
+		$scope.editingState[taskId] = true;
+		$browser.defer(function _defer() {
+			var el = window.document.getElementById('edit-todo-' + taskId);
+			el.setSelectionRange(0, el.value.length);
+			el.focus();
+		});
+	};
+
+	$scope.hideEditForm = function(task, isUpdated) {
+		if (isUpdated) {
+			editTask(task, { description: $window.document.getElementById('edit-todo-' + task.id).value })
+				.then(function _then() {
+					$scope.editingState[task.id] = false;
+				})
+				.catch(function _catch(error) {
+					console.log(error);
+				});
+		} else {
+			$scope.editingState[task.id] = false;
+		}
 	};
 };

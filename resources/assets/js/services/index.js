@@ -2,4 +2,4 @@
 
 var app = require('angular').module('todoApp');
 
-app.controller('TodoCtrl', require('./TodoCtrl'));
+app.factory('storeFactory', require('./storeFactory'));
