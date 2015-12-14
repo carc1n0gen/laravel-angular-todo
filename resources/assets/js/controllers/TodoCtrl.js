@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function($scope, $http, $window, $browser) {
+module.exports = ['$scope', '$http', '$window', '$browser', function($scope, $http, $window, $browser) {
 	$scope.tasks = [];
 	$scope.task = '';
 	$scope.editingState = {};
@@ -88,4 +88,4 @@ module.exports = function($scope, $http, $window, $browser) {
 			$scope.editingState[task.id] = false;
 		}
 	};
-};
+}];

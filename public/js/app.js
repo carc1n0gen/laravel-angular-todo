@@ -30043,7 +30043,7 @@ require('./controllers');
 },{"./controllers":7,"./directives":8,"./services":9,"angular":4,"angular-route":2}],6:[function(require,module,exports){
 'use strict';
 
-module.exports = function ($scope, $http, $window, $browser) {
+module.exports = ['$scope', '$http', '$window', '$browser', function ($scope, $http, $window, $browser) {
 	$scope.tasks = [];
 	$scope.task = '';
 	$scope.editingState = {};
@@ -30119,7 +30119,7 @@ module.exports = function ($scope, $http, $window, $browser) {
 			$scope.editingState[task.id] = false;
 		}
 	};
-};
+}];
 
 },{}],7:[function(require,module,exports){
 'use strict';
@@ -30143,7 +30143,7 @@ app.factory('storeFactory', require('./storeFactory'));
 },{"./storeFactory":10,"angular":4}],10:[function(require,module,exports){
 'use strict';
 
-module.exports = function ($window) {
+module.exports = ['$window', function ($window) {
 	return {
 		get: function _get(key) {
 			return $window.localStorage.getItem(key);
@@ -30165,7 +30165,7 @@ module.exports = function ($window) {
 			$window.localStorage.clear();
 		}
 	};
-};
+}];
 
 },{}]},{},[5]);
 

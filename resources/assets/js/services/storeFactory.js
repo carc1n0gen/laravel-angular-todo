@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function($window) {
+module.exports = ['$window', function($window) {
 	return {
 		get: function _get(key) {
 			return $window.localStorage.getItem(key);
@@ -22,4 +22,4 @@ module.exports = function($window) {
 			$window.localStorage.clear();
 		}
 	};
-};
+}];
