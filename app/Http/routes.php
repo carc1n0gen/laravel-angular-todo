@@ -15,5 +15,10 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::resource('/api/1.0/task', 'TaskController',
-	['except' => ['create', 'edit']]);
+Route::post('/v1/auth/login', 'AuthController@login');
+Route::post('/v1/auth/register', 'AuthController@register');
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('/v1/task', 'TaskController',
+		['except' => ['create', 'edit']]);
+});

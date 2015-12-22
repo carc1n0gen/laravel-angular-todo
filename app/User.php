@@ -36,4 +36,14 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * The tasks that belong to this user.
+     *
+     * @return Collection<App\Task>
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

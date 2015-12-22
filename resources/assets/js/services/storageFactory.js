@@ -3,11 +3,11 @@
 module.exports = ['$window', function($window) {
 	return {
 		get: function _get(key) {
-			return $window.localStorage.getItem(key);
+			return JSON.parse($window.localStorage.getItem(key));
 		},
 
 		set: function _set(key, val) {
-			return $window.localStorage.setItem(key, val);
+			return $window.localStorage.setItem(key, JSON.stringify(val));
 		},
 
 		remove: function _remove(key) {
@@ -15,7 +15,7 @@ module.exports = ['$window', function($window) {
 		},
 
 		has: function _has(key) {
-			return $window.localStorage.get(key) !== null;
+			return $window.localStorage.getItem(key) !== null;
 		},
 
 		clear: function _clear() {

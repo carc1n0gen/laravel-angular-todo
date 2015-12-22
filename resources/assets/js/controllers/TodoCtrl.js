@@ -1,12 +1,14 @@
 'use strict';
 
-module.exports = ['$scope', '$http', '$window', '$browser', function($scope, $http, $window, $browser) {
+var moment = require('moment');
+
+module.exports = ['$scope', '$window', '$browser', 'taskFactory', function($scope, $window, $browser, taskFactory) {
 	$scope.tasks = [];
 	$scope.task = '';
 	$scope.editingState = {};
 	var taskField = $window.document.getElementById('new-todo');
 
-	$http.get('/api/1.0/task')
+	taskFactory.list()
 		.then(function _then(res) {
 			$scope.tasks = res.data
 		})
@@ -18,7 +20,7 @@ module.exports = ['$scope', '$http', '$window', '$browser', function($scope, $ht
 		});
 
 	function editTask(task, updates) {
-		return $http.put('/api/1.0/task/' + task.id, updates)
+		return taskFactory.update(task.id, updates)
 			.then(function _then(res) {
 				for (var prop in res.data) {
 					task[prop] = res.data[prop];
@@ -31,7 +33,7 @@ module.exports = ['$scope', '$http', '$window', '$browser', function($scope, $ht
 
 	$scope.createTask = function () {
 		if ($scope.task.trim()) {
-			$http.post('/api/1.0/task', { description: $scope.task })
+			taskFactory.create($scope.task)
 				.then(function _then(res) {
 					$scope.tasks.push(res.data);
 				})
@@ -40,13 +42,13 @@ module.exports = ['$scope', '$http', '$window', '$browser', function($scope, $ht
 				})
 				.finally(function _finally() {
 					taskField.focus();
-					task = '';
+					$scope.task = '';
 				});
 		}
 	};
 
 	$scope.completeTask = function(task) {
-		editTask(task, { completed_at: new Date() });
+		editTask(task, { completed_at: moment().format('YYYY-MM-DD h:mm:ss') });
 	};
 
 	$scope.restoreTask = function(task) {
@@ -54,7 +56,7 @@ module.exports = ['$scope', '$http', '$window', '$browser', function($scope, $ht
 	};
 
 	$scope.deleteTask = function(task) {
-		$http.delete('/api/1.0/task/' + task.id)
+		taskFactory.delete(task.id)
 			.then(function _then(res) {
 				var idx = $scope.tasks.indexOf(task);
 				if (idx !== -1) {

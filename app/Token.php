@@ -2,44 +2,35 @@
 
 namespace App;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Token extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'tasks';
+    protected $table = 'tokens';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['description', 'completed_at'];
+    protected $fillable = [];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = ['id', 'updated_at'];
 
     /**
-     * Default constructor
-     */
-    public function __construct()
-    {
-        $this->completed_at = null;
-    }
-
-    /**
-     * The user that owns this task
+     * Get the user this token belongs to
      *
-     * @return App\User
+     * @return App\User;
      */
     public function user()
     {
