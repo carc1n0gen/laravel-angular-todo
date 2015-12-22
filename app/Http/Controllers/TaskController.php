@@ -8,49 +8,49 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-	public function index(Request $request)
-	{
+    public function index()
+    {
         return Auth::user()->tasks;
-	}
+    }
 
-	// public function show(Request $request, $id)
-	// {
-		
-	// }
+    // public function show(Request $request, $id)
+    // {
 
-	public function store(Request $request)
-	{
-		$user = Auth::user();
+    // }
+
+    public function store(Request $request)
+    {
+        $user = Auth::user();
         $task = new Task();
         $task->description = $request->input('description');
         $task->user()->associate($user);
         $task->save();
         return $task;
-	}
+    }
 
-	public function update(Request $request, $id)
-	{
-		$task = Task::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $task = Task::findOrFail($id);
         if ($task->user_id !== Auth::user()->id)
         {
-        	return response('Forbidden.')
-        		->header('Status', 403);
+            return response('Forbidden.')
+                ->header('Status', 403);
         }
 
         $task->fill($request->all());
         $task->save();
         return $task;
-	}
+    }
 
-	public function destroy($id)
-	{
-		$task = Task::findOrFail($id);
+    public function destroy($id)
+    {
+        $task = Task::findOrFail($id);
         if ($task->user_id !== Auth::user()->id)
         {
-        	return response('Forbidden.')
-        		->header('Status', 403);
+            return response('Forbidden.')
+                ->header('Status', 403);
         }
 
         $task->delete();
-	}
+    }
 }

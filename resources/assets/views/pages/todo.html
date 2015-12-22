@@ -1,57 +1,57 @@
 <form ng-submit="createTask()">
-	<div class="row">
-		<div class="col-xs-8 col-sm-9">
-			<div class="form-group">
-				<label for="new-todo" class="sr-only">New Task</label>
-				<input id="new-todo" class="form-control" type="text" ng-model="task">
-			</div>
-		</div>
-		<div class="col-xs-4 col-sm-3">
-			<button type="submit" id="create-task" class="btn btn-success btn-block"><span class="glyphicon glyphicon-plus"></span>New Task</button>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-xs-8 col-sm-9">
+            <div class="form-group">
+                <label for="new-todo" class="sr-only">New Task</label>
+                <input id="new-todo" class="form-control" type="text" ng-model="task">
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-3">
+            <button type="submit" id="create-task" class="btn btn-success btn-block"><span class="glyphicon glyphicon-plus"></span>New Task</button>
+        </div>
+    </div>
 </form>
 
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<h2>Todo</h2>
-	</div>
-	<div class="panel-body">
-		<ul class="list-group">
-			<li class="list-group-item" ng-repeat="task in tasks | filter: { completed_at: '!' }">
-				<div class="row">
-					<div class="col-sm-8">
-						<span ng-bind="task.description" ng-click="showEditForm(task.id)" ng-hide="editingState[task.id]"></span>
-						<form id="editing-task-@{{ task.id }}" class="form-inline" ng-show="editingState[task.id]" ng-submit="hideEditForm(task, true)">
-							<div class="form-group">
-								<label for="edit-todo-{{ task.id }}" class="sr-only">Edit Task</label>
-								<input id="edit-todo-{{ task.id }}" class="form-control" type="text" ng-value="task.description" ng-blur="hideEditForm(task.id)">
-								<button class="primary glyphicon glyphicon-floppy-disk" type="submit" title="Save"></a>
-								<button class="danger glyphicon glyphicon glyphicon-minus-sign" title="Cancel" ng-click="hideEditForm(task, false)"></a>
-							</div>
-						</form>
-					</div>
-					<div class="col-sm-4">
-						<button class="danger glyphicon glyphicon-remove pull-right" title="Delete" ng-click="deleteTask(task)"></button>
-						<button class="success glyphicon glyphicon-ok pull-right" title="Complete" ng-click="completeTask(task)"></button>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
+    <div class="panel-heading">
+        <h2>Todo</h2>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="task in tasks | filter: { completed_at: '!' }" ng-click="showEditForm(task.id)">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <span ng-bind="task.description" ng-hide="editingState[task.id]"></span>
+                        <form id="editing-task-{{ task.id }}" class="form-inline" ng-show="editingState[task.id]" ng-submit="hideEditForm(task, true)">
+                            <div class="form-group">
+                                <label for="edit-todo-{{ task.id }}" class="sr-only">Edit Task</label>
+                                <input id="edit-todo-{{ task.id }}" class="form-control" type="text" ng-value="task.description" ng-blur="hideEditForm(task, false)">
+                                <button class="primary glyphicon glyphicon-floppy-disk" type="submit" title="Save"></button>
+                                <button class="danger glyphicon glyphicon glyphicon-minus-sign" type="reset" title="Cancel" ng-click="hideEditForm(task, false)"></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="danger glyphicon glyphicon-remove pull-right" title="Delete" ng-click="deleteTask(task)"></button>
+                        <button class="success glyphicon glyphicon-ok pull-right" title="Complete" ng-click="completeTask(task)"></button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<h2>Completed</h2>
-	</div>
-	<div class="panel-body">
-		<ul class="list-group">
-			<li class="list-group-item" ng-repeat="task in tasks | filter: { completed_at: '' }">
-				<span ng-bind="task.description"></span>
-				<button class="danger glyphicon glyphicon-remove pull-right" title="Delete" ng-click="deleteTask(task)"></button>
-				<button class="primary glyphicon glyphicon-refresh pull-right" title="Restore" ng-click="restoreTask(task)"></button>
-			</li>
-		</ul>
-	</div>
+    <div class="panel-heading">
+        <h2>Completed</h2>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="task in tasks | filter: { completed_at: '' }">
+                <span ng-bind="task.description"></span>
+                <button class="danger glyphicon glyphicon-remove pull-right" title="Delete" ng-click="deleteTask(task)"></button>
+                <button class="primary glyphicon glyphicon-refresh pull-right" title="Restore" ng-click="restoreTask(task)"></button>
+            </li>
+        </ul>
+    </div>
 </div>

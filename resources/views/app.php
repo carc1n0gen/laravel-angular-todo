@@ -2,7 +2,7 @@
 <html lang="en" ng-app="todoApp">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>TodoApp</title>
 	<link rel="stylesheet" href="/css/app.css">
 	<script src="/js/app.js"></script>
 </head>
@@ -17,7 +17,7 @@
 						</div>
 						<ul class="nav navbar-nav navbar-right" ng-if="user">
 							<li>
-								<a class="glyphicon glyphicon-log-out" title="Logout" ng-click="doLogout()"></a>
+								<a ng-click="doLogout()"></span>Logout</a>
 							</li>
 						</ul>
 					</div>

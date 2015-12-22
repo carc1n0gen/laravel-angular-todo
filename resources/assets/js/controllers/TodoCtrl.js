@@ -78,8 +78,9 @@ module.exports = ['$scope', '$window', '$browser', 'taskFactory', function($scop
 	};
 
 	$scope.hideEditForm = function(task, isUpdated) {
+		var input = $window.document.getElementById('edit-todo-' + task.id);
 		if (isUpdated) {
-			editTask(task, { description: $window.document.getElementById('edit-todo-' + task.id).value })
+			editTask(task, { description: input.value })
 				.then(function _then() {
 					$scope.editingState[task.id] = false;
 				})
