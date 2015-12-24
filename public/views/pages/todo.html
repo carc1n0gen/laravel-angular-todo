@@ -18,10 +18,10 @@
     </div>
     <div class="panel-body">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="task in tasks | filter: { completed_at: '!' }" ng-click="showEditForm(task.id)">
+            <li class="list-group-item" ng-repeat="task in tasks | filter: { completed_at: '!' }">
                 <div class="row">
                     <div class="col-sm-8">
-                        <span ng-bind="task.description" ng-hide="editingState[task.id]"></span>
+                        <span ng-bind="task.description" ng-hide="editingState[task.id]" ng-click="showEditForm(task.id)"></span>
                         <form id="editing-task-{{ task.id }}" class="form-inline" ng-show="editingState[task.id]" ng-submit="hideEditForm(task, true)">
                             <div class="form-group">
                                 <label for="edit-todo-{{ task.id }}" class="sr-only">Edit Task</label>

@@ -44962,6 +44962,7 @@ module.exports = ['$scope', '$window', '$browser', 'taskFactory', function ($sco
 			});
 		} else {
 			$scope.editingState[task.id] = false;
+			input.value = task.description;
 		}
 	};
 }];

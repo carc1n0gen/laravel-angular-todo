@@ -89,6 +89,7 @@ module.exports = ['$scope', '$window', '$browser', 'taskFactory', function($scop
 				});
 		} else {
 			$scope.editingState[task.id] = false;
+			input.value = task.description;
 		}
 	};
 }];
