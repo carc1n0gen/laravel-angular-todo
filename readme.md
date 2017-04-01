@@ -10,4 +10,4 @@
 
 `php artisan migrate`
 
-![Screen Shot](http://imgur.com/UTtiIpB)
+![Imgur](http://i.imgur.com/UTtiIpB.png)
