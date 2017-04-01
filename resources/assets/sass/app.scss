@@ -1,0 +1,87 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+a {
+    cursor: pointer;
+}
+
+#todo-app {
+    margin-top: 22px;
+}
+
+.action-column {
+    width: 114px;
+}
+
+.todo-metadata {
+    color: #afafaf;
+}
+
+// Tables
+
+
+// Buttons
+.btn-todo {
+    padding: 0;
+    margin: 0 5px;
+    width: 36px;
+    height: 36px;
+    border-width: 1px;
+    line-height: 36px;
+    border-radius: 50%;
+}
+
+.btn-todo-sml {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    line-height: 19px;
+}
+
+.btn-primary:hover {
+    background-color: $brand-primary;
+    color: #fff;
+    border-color: $brand-primary;
+}
+
+.btn-success:hover {
+    background-color: $brand-success;
+    color: #fff;
+    border-color: $brand-success;
+}
+
+.btn-danger:hover {
+    background-color: $brand-danger;
+    color: #fff;
+    border-color: $brand-danger;
+}
+
+// Navbar
+.navbar-nav {
+    margin: -1px -15px;
+}
+
+.navbar-form {
+    height: 36px;
+}
+
+// Tables
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+// hax
+.glyphicon {
+    top: 0;
+}
+
+.glyphicon-plus:before {
+    margin-left: 1px;
+}
