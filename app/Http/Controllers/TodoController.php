@@ -15,13 +15,14 @@ class TodoController extends Controller
 
     public function store(Request $request)
     {
-        $fields = array_merge($request->all(), ['user_id' => Auth::user()->id]);
-        $todo = Todo::create($fields);
+        $todo = Todo::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
         return $todo;
     }
 
     public function update(Request $request, Todo $todo)
     {
+        $this->authorize('task.update', $todo);
+
         $todo->fill($request->all());
         $todo->save();
         return $todo;
@@ -29,6 +30,8 @@ class TodoController extends Controller
 
     public function destroy(Todo $todo)
     {
+        $this->authorize('task.delete', $todo);
+
         $todo->delete();
         return response('', 204);
     }
